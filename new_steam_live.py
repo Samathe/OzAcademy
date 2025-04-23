@@ -95,6 +95,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # Функция для отображения контента урока
+# Функция для отображения контента урока
 def show_lesson_content(category, topic, lesson):
     st.markdown(f"<h2>{lesson}</h2>", unsafe_allow_html=True)
     
@@ -119,18 +120,115 @@ def hello_world():
 hello_world()
             """, language="python")
     
-    # Интерактивные элементы
+    # Интерактивные тесты - улучшенная версия
     st.markdown("### Проверьте свои знания")
-    question = st.radio(
-        "Выберите правильный ответ:",
-        ["Вариант A", "Вариант B", "Вариант C", "Вариант D"]
-    )
     
-    if st.button("Проверить ответ"):
-        if question == "Вариант C":  # Предположим, что это правильный ответ
-            st.success("Правильно! Отличная работа!")
-        else:
-            st.error("Попробуйте еще раз!")
+    # Словарь вопросов и ответов по категориям и темам
+    quiz_questions = {
+        "Структуры данных и алгоритмы": {
+            "Алгоритмы сортировки": [
+                {
+                    "question": "Алгоритм сортировки, который меняет местами соседние элементы, если предыдущий элемент больше последующего элемента – это",
+                    "options": [
+                        "Bubble sort (пузырьковая сортировка)",
+                        "Insertion sort (сортировка вставкой)",
+                        "Quick sort (быстрая сортировка)",
+                        "Selection sort (сортировка выбором)"
+                    ],
+                    "correct_index": 0,
+                    "explanation": "Пузырьковая сортировка (Bubble sort) работает путем многократного прохода по списку, сравнивая соседние элементы и меняя их местами, если они находятся в неправильном порядке."
+                },
+                {
+                    "question": "Какова временная сложность пузырьковой сортировки в худшем случае?",
+                    "options": [
+                        "O(1)",
+                        "O(n)",
+                        "O(n log n)",
+                        "O(n²)"
+                    ],
+                    "correct_index": 3,
+                    "explanation": "Временная сложность пузырьковой сортировки в худшем случае составляет O(n²), где n - количество элементов в массиве."
+                }
+            ],
+            "Базовые структуры данных": [
+                {
+                    "question": "Какая структура данных работает по принципу LIFO (Last In, First Out)?",
+                    "options": [
+                        "Очередь (Queue)",
+                        "Стек (Stack)",
+                        "Связный список (Linked List)",
+                        "Хеш-таблица (Hash Table)"
+                    ],
+                    "correct_index": 1,
+                    "explanation": "Стек (Stack) работает по принципу LIFO - последний вошел, первый вышел."
+                }
+            ]
+        },
+        "Основы программирования": {
+            "Основы Python": [
+                {
+                    "question": "Какой оператор используется для проверки равенства в Python?",
+                    "options": [
+                        "=",
+                        "==",
+                        "===",
+                        ":="
+                    ],
+                    "correct_index": 1,
+                    "explanation": "В Python оператор == используется для проверки равенства значений, а = для присваивания значений переменным."
+                }
+            ]
+        }
+    }
+    
+    # Проверяем, есть ли вопросы для текущей категории и темы
+    questions = None
+    if category in quiz_questions and topic in quiz_questions[category]:
+        questions = quiz_questions[category][topic]
+    
+    if questions:
+        # Выбираем случайный вопрос из списка доступных вопросов
+        import random
+        question_data = random.choice(questions)
+        
+        # Отображаем вопрос
+        st.markdown(f"**{question_data['question']}**")
+        
+        # Создаем ключ сессии для отслеживания выбора и ответа
+        question_key = f"question_{category}_{topic}_{lesson}"
+        submit_key = f"submit_{category}_{topic}_{lesson}"
+        
+        # Инициализируем переменные состояния, если они еще не существуют
+        if question_key not in st.session_state:
+            st.session_state[question_key] = None
+        
+        if submit_key not in st.session_state:
+            st.session_state[submit_key] = False
+        
+        # Отображаем варианты ответа
+        answer = st.radio(
+            "Выберите правильный ответ:",
+            question_data["options"],
+            key=question_key
+        )
+        
+        # Определяем индекс выбранного варианта
+        selected_index = question_data["options"].index(answer) if answer else None
+        
+        # Кнопка для проверки ответа
+        if st.button("Проверить ответ", key=submit_key):
+            st.session_state[submit_key] = True
+        
+        # Показываем результат после нажатия кнопки
+        if st.session_state[submit_key]:
+            if selected_index == question_data["correct_index"]:
+                st.success("✅ Правильно! " + question_data["explanation"])
+            else:
+                correct_answer = question_data["options"][question_data["correct_index"]]
+                st.error(f"❌ Неправильно. Правильный ответ: {correct_answer}")
+                st.info(question_data["explanation"])
+    else:
+        st.info("Тесты для этой темы пока недоступны.")
     
     # Добавление практического задания
     st.markdown("### Практическое задание")
