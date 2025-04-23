@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сызықтық теңдеулерді шешуді үйренеміз</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f2ff;
+        }
+        h1 {
+            color: #6a0dad;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+        }
+        h2 {
+            color: #8e44ad;
+            border-bottom: 2px solid #8e44ad;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #9b59b6;
+            margin-top: 25px;
+        }
+        .checklist {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .checklist li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 35px;
+        }
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #8e44ad;
+            font-weight: bold;
+        }
+        .example {
+            background-color: #e8daef;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .example h4 {
+            margin-top: 0;
+            color: #6a0dad;
+        }
+        .problem-set {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 30px 0;
+        }
+        .problem {
+            border-bottom: 1px dashed #ccc;
+            padding: 15px 0;
+        }
+        .problem:last-child {
+            border-bottom: none;
+        }
+        .problem h4 {
+            color: #8e44ad;
+            margin-top: 0;
+        }
+        .solution {
+            display: none;
+            background-color: #f0e6f6;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .problem-number {
+            font-weight: bold;
+            color: #6a0dad;
+        }
+        .show-solution {
+            background-color: #8e44ad;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .show-solution:hover {
+            background-color: #6a0dad;
+        }
+        .warning {
+            background-color: #ffe6e6;
+            border-left: 5px solid #ff6666;
+            padding: 10px 15px;
+            margin: 20px 0;
+        }
+        .warning h4 {
+            color: #cc0000;
+            margin-top: 0;
+        }
+        .tip {
+            background-color: #e6f9ff;
+            border-left: 5px solid #3399ff;
+            padding: 10px 15px;
+            margin: 20px 0;
+        }
+        .tip h4 {
+            color: #0066cc;
+            margin-top: 0;
+        }
+        .navbar {
+            background-color: #8e44ad;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #e8daef;
+            color: #8e44ad;
+        }
+        .highlight {
+            background-color: #ffff99;
+            padding: 0 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#checklist">Тексеру тізімі</a>
+        <a href="#examples">Мысалдар</a>
+        <a href="#common-mistakes">Жиі кездесетін қателер</a>
+        <a href="#level1">1-деңгей</a>
+        <a href="#level2">2-деңгей</a>
+        <a href="#level3">3-деңгей</a>
+        <a href="#level4">4-деңгей</a>
+        <a href="#text-problems">Мәтіндік есептер</a>
+    </div>
+
+    <h1>Сызықтық теңдеулерді шешуді үйренеміз</h1>
+    
+    <div class="checklist" id="checklist">
+        <h2>Тексеру тізімі: Сызықтық теңдеуді шешу жолдары</h2>
+        <ol>
+            <li>Теңдеудің екі жағын да жеңілдетіңіз: жақшаларды ашып, ұқсас мүшелерді біріктіріңіз.</li>
+            <li>Айнымалысы бар барлық қосылғыштарды теңдеудің сол жағына, ал барлық сандарды оң жағына көшіріңіз.</li>
+            <li>Ұқсас қосылғыштарды біріктіріңіз (x коэффициенттерін қосыңыз немесе азайтыңыз).</li>
+            <li>x-ті көрсетіңіз: теңдеудің екі жағын да x коэффициентіне бөліңіз.</li>
+            <li>Алынған x мәнін бастапқы теңдеуге қою арқылы шешімді тексеріңіз.</li>
+        </ol>
+    </div>
+
+    <div id="examples">
+        <h2>Сызықтық теңдеулерді шешу мысалдары</h2>
+        
+        <div class="example">
+            <h4>Мысал 1: Қарапайым теңдеу</h4>
+            <p>Теңдеуді шешейік: <strong>3x + 5 = 20</strong></p>
+            <ol>
+                <li>5 санын қарама-қарсы белгімен оң жаққа көшіреміз:<br>
+                    3x = 20 - 5<br>
+                    3x = 15</li>
+                <li>Теңдеудің екі жағын да 3-ке бөлеміз:<br>
+                    x = 15 ÷ 3<br>
+                    x = 5</li>
+                <li>Тексеру: 3 × 5 + 5 = 15 + 5 = 20 ✓</li>
+            </ol>
+            <p>Жауабы: x = 5</p>
+        </div>
+
+        <div class="example">
+            <h4>Мысал 2: Жақшалы теңдеу</h4>
+            <p>Теңдеуді шешейік: <strong>2(x + 3) = 14</strong></p>
+            <ol>
+                <li>Жақшаларды ашамыз:<br>
+                    2x + 6 = 14</li>
+                <li>6 санын қарама-қарсы белгімен оң жаққа көшіреміз:<br>
+                    2x = 14 - 6<br>
+                    2x = 8</li>
+                <li>Теңдеудің екі жағын да 2-ге бөлеміз:<br>
+                    x = 8 ÷ 2<br>
+                    x = 4</li>
+                <li>Тексеру: 2(4 + 3) = 2 × 7 = 14 ✓</li>
+            </ol>
+            <p>Жауабы: x = 4</p>
+        </div>
+
+        <div class="example">
+            <h4>Мысал 3: Теңдеудің екі жағында да айнымалы бар</h4>
+            <p>Теңдеуді шешейік: <strong>5x - 3 = 2x + 6</strong></p>
+            <ol>
+                <li>Айнымалысы бар қосылғыштарды сол жаққа, ал сандарды оң жаққа көшіреміз:<br>
+                    5x - 2x = 6 + 3</li>
+                <li>Ұқсас қосылғыштарды біріктіреміз:<br>
+                    3x = 9</li>
+                <li>Теңдеудің екі жағын да 3-ке бөлеміз:<br>
+                    x = 9 ÷ 3<br>
+                    x = 3</li>
+                <li>Тексеру: 5 × 3 - 3 = 15 - 3 = 12 және 2 × 3 + 6 = 6 + 6 = 12 ✓</li>
+            </ol>
+            <p>Жауабы: x = 3</p>
+        </div>
+
+        <div class="example">
+            <h4>Мысал 4: Бөлшектері бар теңдеу</h4>
+            <p>Теңдеуді шешейік: <strong>x/2 + 1 = 4</strong></p>
+            <ol>
+                <li>1 санын қарама-қарсы белгімен оң жаққа көшіреміз:<br>
+                    x/2 = 4 - 1<br>
+                    x/2 = 3</li>
+                <li>Теңдеудің екі жағын да 2-ге көбейтеміз:<br>
+                    x = 3 × 2<br>
+                    x = 6</li>
+                <li>Тексеру: 6/2 + 1 = 3 + 1 = 4 ✓</li>
+            </ol>
+            <p>Жауабы: x = 6</p>
+        </div>
+    </div>
+
+    <div id="common-mistakes">
+        <h2>Теңдеулерді шешудегі жиі кездесетін қателер</h2>
+        
+        <div class="warning">
+            <h4>Қате 1: Жақшаларды дұрыс ашпау</h4>
+            <p><strong>Дұрыс емес:</strong> 2(x + 3) = 2x + 3</p>
+            <p><strong>Дұрыс:</strong> 2(x + 3) = 2x + 6</p>
+            <p>Санды жақшадағы өрнекке көбейткенде, бұл санды жақша ішіндегі <em>әрбір</em> қосылғышқа көбейту керек!</p>
+        </div>
+        
+        <div class="warning">
+            <h4>Қате 2: Қосылғыштарды дұрыс көшірмеу</h4>
+            <p><strong>Дұрыс емес:</strong> 3x + 5 = 20 → 3x = 20 + 5 = 25</p>
+            <p><strong>Дұрыс:</strong> 3x + 5 = 20 → 3x = 20 - 5 = 15</p>
+            <p>Қосылғышты теңдеудің бір жағынан екінші жағына көшіргенде оның белгісі қарама-қарсы болады!</p>
+        </div>
+        
+        <div class="warning">
+            <h4>Қате 3: Теңдеудің тек бір жағын бөлу</h4>
+            <p><strong>Дұрыс емес:</strong> 4x = 12 → x = 12 (тек сол жақты 4-ке бөлеміз)</p>
+            <p><strong>Дұрыс:</strong> 4x = 12 → x = 12 ÷ 4 = 3 (екі жақты да 4-ке бөлеміз)</p>
+            <p>Теңдеудің <em>екі</em> жағын да санға бөлу керек!</p>
+        </div>
+        
+        <div class="warning">
+            <h4>Қате 4: Бөлшектермен дұрыс жұмыс істемеу</h4>
+            <p><strong>Дұрыс емес:</strong> x/3 = 5 → x = 5/3</p>
+            <p><strong>Дұрыс:</strong> x/3 = 5 → x = 5 × 3 = 15</p>
+            <p>Бөлімнен құтылу үшін теңдеудің екі жағын да осы бөлімге көбейту керек!</p>
+        </div>
+    </div>
+
+    <div class="tip">
+        <h4>Пайдалы кеңес</h4>
+        <p>Әрқашан жауабыңызды тексеріңіз, табылған x мәнін бастапқы теңдеуге қойыңыз. Бұл шешімдегі қателерді табуға көмектеседі!</p>
+    </div>
+
+    <div class="problem-set" id="level1">
+        <h2>1-деңгей: Қарапайым теңдеулер</h2>
+        
+        <div class="problem">
+            <p><span class="problem-number">1.1.</span> x + 7 = 12</p>
+            <button class="show-solution" onclick="toggleSolution('solution1-1')">Шешімді көрсету</button>
+            <div class="solution" id="solution1-1">
+                <p>7-ні қарама-қарсы белгімен оң жаққа көшіреміз:</p>
+                <p>x = 12 - 7</p>
+                <p>x = 5</p>
+                <p>Тексеру: 5 + 7 = 12 ✓</p>
+                <p><strong>Жауабы: x = 5</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">1.2.</span> 3x = 18</p>
+            <button class="show-solution" onclick="toggleSolution('solution1-2')">Шешімді көрсету</button>
+            <div class="solution" id="solution1-2">
+                <p>Теңдеудің екі жағын да 3-ке бөлеміз:</p>
+                <p>x = 18 ÷ 3</p>
+                <p>x = 6</p>
+                <p>Тексеру: 3 × 6 = 18 ✓</p>
+                <p><strong>Жауабы: x = 6</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">1.3.</span> x - 5 = 10</p>
+            <button class="show-solution" onclick="toggleSolution('solution1-3')">Шешімді көрсету</button>
+            <div class="solution" id="solution1-3">
+                <p>-5-ті қарама-қарсы белгімен оң жаққа көшіреміз:</p>
+                <p>x = 10 + 5</p>
+                <p>x = 15</p>
+                <p>Тексеру: 15 - 5 = 10 ✓</p>
+                <p><strong>Жауабы: x = 15</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">1.4.</span> 5x = 25</p>
+            <button class="show-solution" onclick="toggleSolution('solution1-4')">Шешімді көрсету</button>
+            <div class="solution" id="solution1-4">
+                <p>Теңдеудің екі жағын да 5-ке бөлеміз:</p>
+                <p>x = 25 ÷ 5</p>
+                <p>x = 5</p>
+                <p>Тексеру: 5 × 5 = 25 ✓</p>
+                <p><strong>Жауабы: x = 5</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">1.5.</span> x + 9 = 4</p>
+            <button class="show-solution" onclick="toggleSolution('solution1-5')">Шешімді көрсету</button>
+            <div class="solution" id="solution1-5">
+                <p>9-ды қарама-қарсы белгімен оң жаққа көшіреміз:</p>
+                <p>x = 4 - 9</p>
+                <p>x = -5</p>
+                <p>Тексеру: -5 + 9 = 4 ✓</p>
+                <p><strong>Жауабы: x = -5</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">1.6.</span> 4x = -20</p>
+            <button class="show-solution" onclick="toggleSolution('solution1-6')">Шешімді көрсету</button>
+            <div class="solution" id="solution1-6">
+                <p>Теңдеудің екі жағын да 4-ке бөлеміз:</p>
+                <p>x = -20 ÷ 4</p>
+                <p>x = -5</p>
+                <p>Тексеру: 4 × (-5) = -20 ✓</p>
+                <p><strong>Жауабы: x = -5</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">1.7.</span> x/2 = 6</p>
+            <button class="show-solution" onclick="toggleSolution('solution1-7')">Шешімді көрсету</button>
+            <div class="solution" id="solution1-7">
+                <p>Теңдеудің екі жағын да 2-ге көбейтеміз:</p>
+                <p>x = 6 × 2</p>
+                <p>x = 12</p>
+                <p>Тексеру: 12/2 = 6 ✓</p>
+                <p><strong>Жауабы: x = 12</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">1.8.</span> x/5 = -3</p>
+            <button class="show-solution" onclick="toggleSolution('solution1-8')">Шешімді көрсету</button>
+            <div class="solution" id="solution1-8">
+                <p>Теңдеудің екі жағын да 5-ке көбейтеміз:</p>
+                <p>x = -3 × 5</p>
+                <p>x = -15</p>
+                <p>Тексеру: -15/5 = -3 ✓</p>
+                <p><strong>Жауабы: x = -15</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="problem-set" id="level2">
+        <h2>2-деңгей: Орташа күрделілік теңдеулер</h2>
+        
+        <div class="problem">
+            <p><span class="problem-number">2.1.</span> 2x + 5 = 13</p>
+            <button class="show-solution" onclick="toggleSolution('solution2-1')">Шешімді көрсету</button>
+            <div class="solution" id="solution2-1">
+                <p>5-ті қарама-қарсы белгімен оң жаққа көшіреміз:</p>
+                <p>2x = 13 - 5</p>
+                <p>2x = 8</p>
+                <p>Теңдеудің екі жағын да 2-ге бөлеміз:</p>
+                <p>x = 8 ÷ 2</p>
+                <p>x = 4</p>
+                <p>Тексеру: 2 × 4 + 5 = 8 + 5 = 13 ✓</p>
+                <p><strong>Жауабы: x = 4</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">2.2.</span> 3x - 7 = 14</p>
+            <button class="show-solution" onclick="toggleSolution('solution2-2')">Шешімді көрсету</button>
+            <div class="solution" id="solution2-2">
+                <p>-7-ні қарама-қарсы белгімен оң жаққа көшіреміз:</p>
+                <p>3x = 14 + 7</p>
+                <p>3x = 21</p>
+                <p>Теңдеудің екі жағын да 3-ке бөлеміз:</p>
+                <p>x = 21 ÷ 3</p>
+                <p>x = 7</p>
+                <p>Тексеру: 3 × 7 - 7 = 21 - 7 = 14 ✓</p>
+                <p><strong>Жауабы: x = 7</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">2.3.</span> 5x + 10 = 0</p>
+            <button class="show-solution" onclick="toggleSolution('solution2-3')">Шешімді көрсету</button>
+            <div class="solution" id="solution2-3">
+                <p>10-ды қарама-қарсы белгімен оң жаққа көшіреміз:</p>
+                <p>5x = 0 - 10</p>
+                <p>5x = -10</p>
+                <p>Теңдеудің екі жағын да 5-ке бөлеміз:</p>
+                <p>x = -10 ÷ 5</p>
+                <p>x = -2</p>
+                <p>Тексеру: 5 × (-2) + 10 = -10 + 10 = 0 ✓</p>
+                <p><strong>Жауабы: x = -2</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">2.4.</span> 4x - 9 = -1</p>
+            <button class="show-solution" onclick="toggleSolution('solution2-4')">Шешімді көрсету</button>
+            <div class="solution" id="solution2-4">
+                <p>-9-ды қарама-қарсы белгімен оң жаққа көшіреміз:</p>
+                <p>4x = -1 + 9</p>
+                <p>4x = 8</p>
+                <p>Теңдеудің екі жағын да 4-ке бөлеміз:</p>
+                <p>x = 8 ÷ 4</p>
+                <p>x = 2</p>
+                <p>Тексеру: 4 × 2 - 9 = 8 - 9 = -1 ✓</p>
+                <p><strong>Жауабы: x = 2</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">2.5.</span> 7x + 3 = 10</p>
+            <button class="show-solution" onclick="toggleSolution('solution2-5')">Шешімді көрсету</button>
+            <div class="solution" id="solution2-5">
+                <p>3-ті қарама-қарсы белгімен оң жаққа көшіреміз:</p>
+                <p>7x = 10 - 3</p>
+                <p>7x = 7</p>
+                <p>Теңдеудің екі жағын да 7-ге бөлеміз:</p>
+                <p>x = 7 ÷ 7</p>
+                <p>x = 1</p>
+                <p>Тексеру: 7 × 1 + 3 = 7 + 3 = 10 ✓</p>
+                <p><strong>Жауабы: x = 1</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">2.6.</span> 2(x + 4) = 16</p>
+            <button class="show-solution" onclick="toggleSolution('solution2-6')">Шешімді көрсету</button>
+            <div class="solution" id="solution2-6">
+                <p>Жақшаларды ашамыз:</p>
+                <p>2x + 8 = 16</p>
+                <p>8-ді қарама-қарсы белгімен оң жаққа көшіреміз:</p>
+                <p>2x = 16 - 8</p>
+                <p>2x = 8</p>
+                <p>Теңдеудің екі жағын да 2-ге бөлеміз:</p>
+                <p>x = 8 ÷ 2</p>
+                <p>x = 4</p>
+                <p>Тексеру: 2(4 + 4) = 2 × 8 = 16 ✓</p>
+                <p><strong>Жауабы: x = 4</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">2.7.</span> 3(x - 2) = 9</p>
+            <button class="show-solution" onclick="toggleSolution('solution2-7')">Шешімді көрсету</button>
+            <div class="solution" id="solution2-7">
+                <p>Жақшаларды ашамыз:</p>
+                <p>3x - 6 = 9</p>
+                <p>-6-ны қарама-қарсы белгімен оң жаққа көшіреміз:</p>
+                <p>3x = 9 + 6</p>
+                <p>3x = 15</p>
+                <p>Теңдеудің екі жағын да 3-ке бөлеміз:</p>
+                <p>x = 15 ÷ 3</p>
+                <p>x = 5</p>
+                <p>Тексеру: 3(5 - 2) = 3 × 3 = 9
+        <p>Тексеру: 3(5 - 2) = 3 × 3 = 9 ✓</p>
+                <p><strong>Жауабы: x = 5</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">2.8.</span> 4(x + 1) = 24</p>
+            <button class="show-solution" onclick="toggleSolution('solution2-8')">Шешімді көрсету</button>
+            <div class="solution" id="solution2-8">
+                <p>Жақшаларды ашамыз:</p>
+                <p>4x + 4 = 24</p>
+                <p>4-ті қарама-қарсы белгімен оң жаққа көшіреміз:</p>
+                <p>4x = 24 - 4</p>
+                <p>4x = 20</p>
+                <p>Теңдеудің екі жағын да 4-ке бөлеміз:</p>
+                <p>x = 20 ÷ 4</p>
+                <p>x = 5</p>
+                <p>Тексеру: 4(5 + 1) = 4 × 6 = 24 ✓</p>
+                <p><strong>Жауабы: x = 5</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="problem-set" id="level3">
+        <h2>3-деңгей: Екі жағында да айнымалы бар теңдеулер</h2>
+        
+        <div class="problem">
+            <p><span class="problem-number">3.1.</span> 3x + 2 = x + 10</p>
+            <button class="show-solution" onclick="toggleSolution('solution3-1')">Шешімді көрсету</button>
+            <div class="solution" id="solution3-1">
+                <p>Айнымалы бар қосылғыштарды сол жаққа, сандарды оң жаққа көшіреміз:</p>
+                <p>3x - x = 10 - 2</p>
+                <p>Ұқсас қосылғыштарды біріктіреміз:</p>
+                <p>2x = 8</p>
+                <p>Теңдеудің екі жағын да 2-ге бөлеміз:</p>
+                <p>x = 8 ÷ 2</p>
+                <p>x = 4</p>
+                <p>Тексеру: 3 × 4 + 2 = 12 + 2 = 14 және 4 + 10 = 14 ✓</p>
+                <p><strong>Жауабы: x = 4</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">3.2.</span> 5x - 3 = 2x + 9</p>
+            <button class="show-solution" onclick="toggleSolution('solution3-2')">Шешімді көрсету</button>
+            <div class="solution" id="solution3-2">
+                <p>Айнымалы бар қосылғыштарды сол жаққа, сандарды оң жаққа көшіреміз:</p>
+                <p>5x - 2x = 9 + 3</p>
+                <p>Ұқсас қосылғыштарды біріктіреміз:</p>
+                <p>3x = 12</p>
+                <p>Теңдеудің екі жағын да 3-ке бөлеміз:</p>
+                <p>x = 12 ÷ 3</p>
+                <p>x = 4</p>
+                <p>Тексеру: 5 × 4 - 3 = 20 - 3 = 17 және 2 × 4 + 9 = 8 + 9 = 17 ✓</p>
+                <p><strong>Жауабы: x = 4</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">3.3.</span> 7x + 5 = 4x - 4</p>
+            <button class="show-solution" onclick="toggleSolution('solution3-3')">Шешімді көрсету</button>
+            <div class="solution" id="solution3-3">
+                <p>Айнымалы бар қосылғыштарды сол жаққа, сандарды оң жаққа көшіреміз:</p>
+                <p>7x - 4x = -4 - 5</p>
+                <p>Ұқсас қосылғыштарды біріктіреміз:</p>
+                <p>3x = -9</p>
+                <p>Теңдеудің екі жағын да 3-ке бөлеміз:</p>
+                <p>x = -9 ÷ 3</p>
+                <p>x = -3</p>
+                <p>Тексеру: 7 × (-3) + 5 = -21 + 5 = -16 және 4 × (-3) - 4 = -12 - 4 = -16 ✓</p>
+                <p><strong>Жауабы: x = -3</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">3.4.</span> 2x - 7 = 6x + 9</p>
+            <button class="show-solution" onclick="toggleSolution('solution3-4')">Шешімді көрсету</button>
+            <div class="solution" id="solution3-4">
+                <p>Айнымалы бар қосылғыштарды сол жаққа, сандарды оң жаққа көшіреміз:</p>
+                <p>2x - 6x = 9 + 7</p>
+                <p>Ұқсас қосылғыштарды біріктіреміз:</p>
+                <p>-4x = 16</p>
+                <p>Теңдеудің екі жағын да -4-ке бөлеміз:</p>
+                <p>x = 16 ÷ (-4)</p>
+                <p>x = -4</p>
+                <p>Тексеру: 2 × (-4) - 7 = -8 - 7 = -15 және 6 × (-4) + 9 = -24 + 9 = -15 ✓</p>
+                <p><strong>Жауабы: x = -4</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">3.5.</span> 3(x + 2) = 2(x - 1)</p>
+            <button class="show-solution" onclick="toggleSolution('solution3-5')">Шешімді көрсету</button>
+            <div class="solution" id="solution3-5">
+                <p>Жақшаларды ашамыз:</p>
+                <p>3x + 6 = 2x - 2</p>
+                <p>Айнымалы бар қосылғыштарды сол жаққа, сандарды оң жаққа көшіреміз:</p>
+                <p>3x - 2x = -2 - 6</p>
+                <p>Ұқсас қосылғыштарды біріктіреміз:</p>
+                <p>x = -8</p>
+                <p>Тексеру: 3(-8 + 2) = 3 × (-6) = -18 және 2(-8 - 1) = 2 × (-9) = -18 ✓</p>
+                <p><strong>Жауабы: x = -8</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">3.6.</span> 4(x - 3) = 3(x + 1)</p>
+            <button class="show-solution" onclick="toggleSolution('solution3-6')">Шешімді көрсету</button>
+            <div class="solution" id="solution3-6">
+                <p>Жақшаларды ашамыз:</p>
+                <p>4x - 12 = 3x + 3</p>
+                <p>Айнымалы бар қосылғыштарды сол жаққа, сандарды оң жаққа көшіреміз:</p>
+                <p>4x - 3x = 3 + 12</p>
+                <p>Ұқсас қосылғыштарды біріктіреміз:</p>
+                <p>x = 15</p>
+                <p>Тексеру: 4(15 - 3) = 4 × 12 = 48 және 3(15 + 1) = 3 × 16 = 48 ✓</p>
+                <p><strong>Жауабы: x = 15</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="problem-set" id="level4">
+        <h2>4-деңгей: Күрделі теңдеулер</h2>
+        
+        <div class="problem">
+            <p><span class="problem-number">4.1.</span> 2(3x - 1) = 4(x + 2)</p>
+            <button class="show-solution" onclick="toggleSolution('solution4-1')">Шешімді көрсету</button>
+            <div class="solution" id="solution4-1">
+                <p>Жақшаларды ашамыз:</p>
+                <p>6x - 2 = 4x + 8</p>
+                <p>Айнымалы бар қосылғыштарды сол жаққа, сандарды оң жаққа көшіреміз:</p>
+                <p>6x - 4x = 8 + 2</p>
+                <p>Ұқсас қосылғыштарды біріктіреміз:</p>
+                <p>2x = 10</p>
+                <p>Теңдеудің екі жағын да 2-ге бөлеміз:</p>
+                <p>x = 5</p>
+                <p>Тексеру: 2(3 × 5 - 1) = 2(15 - 1) = 2 × 14 = 28 және 4(5 + 2) = 4 × 7 = 28 ✓</p>
+                <p><strong>Жауабы: x = 5</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">4.2.</span> 5(2x + 3) - 10 = 3(x - 2) + 25</p>
+            <button class="show-solution" onclick="toggleSolution('solution4-2')">Шешімді көрсету</button>
+            <div class="solution" id="solution4-2">
+                <p>Жақшаларды ашамыз:</p>
+                <p>10x + 15 - 10 = 3x - 6 + 25</p>
+                <p>Өрнектерді жеңілдетеміз:</p>
+                <p>10x + 5 = 3x + 19</p>
+                <p>Айнымалы бар қосылғыштарды сол жаққа, сандарды оң жаққа көшіреміз:</p>
+                <p>10x - 3x = 19 - 5</p>
+                <p>Ұқсас қосылғыштарды біріктіреміз:</p>
+                <p>7x = 14</p>
+                <p>Теңдеудің екі жағын да 7-ге бөлеміз:</p>
+                <p>x = 2</p>
+                <p>Тексеру: 5(2 × 2 + 3) - 10 = 5(4 + 3) - 10 = 5 × 7 - 10 = 35 - 10 = 25 және 3(2 - 2) + 25 = 3 × 0 + 25 = 0 + 25 = 25 ✓</p>
+                <p><strong>Жауабы: x = 2</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">4.3.</span> x/2 + 3 = x/3 + 2</p>
+            <button class="show-solution" onclick="toggleSolution('solution4-3')">Шешімді көрсету</button>
+            <div class="solution" id="solution4-3">
+                <p>Сандарды қарама-қарсы белгімен көшіреміз:</p>
+                <p>x/2 - x/3 = 2 - 3</p>
+                <p>x/2 - x/3 = -1</p>
+                <p>Бөлшектерді ортақ бөлімге келтіреміз:</p>
+                <p>(3x - 2x)/6 = -1</p>
+                <p>x/6 = -1</p>
+                <p>Теңдеудің екі жағын да 6-ға көбейтеміз:</p>
+                <p>x = -6</p>
+                <p>Тексеру: (-6)/2 + 3 = -3 + 3 = 0 және (-6)/3 + 2 = -2 + 2 = 0 ✓</p>
+                <p><strong>Жауабы: x = -6</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">4.4.</span> 3(x - 2)/4 = (x + 1)/2</p>
+            <button class="show-solution" onclick="toggleSolution('solution4-4')">Шешімді көрсету</button>
+            <div class="solution" id="solution4-4">
+                <p>Теңдеудің екі жағын да 4-ке көбейтеміз:</p>
+                <p>3(x - 2) = 2(x + 1)</p>
+                <p>Жақшаларды ашамыз:</p>
+                <p>3x - 6 = 2x + 2</p>
+                <p>Айнымалы бар қосылғыштарды сол жаққа, сандарды оң жаққа көшіреміз:</p>
+                <p>3x - 2x = 2 + 6</p>
+                <p>Ұқсас қосылғыштарды біріктіреміз:</p>
+                <p>x = 8</p>
+                <p>Тексеру: 3(8 - 2)/4 = 3 × 6/4 = 18/4 = 4.5 және (8 + 1)/2 = 9/2 = 4.5 ✓</p>
+                <p><strong>Жауабы: x = 8</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">4.5.</span> 5(x - 1) - 2(x + 3) = 3x + 1</p>
+            <button class="show-solution" onclick="toggleSolution('solution4-5')">Шешімді көрсету</button>
+            <div class="solution" id="solution4-5">
+                <p>Жақшаларды ашамыз:</p>
+                <p>5x - 5 - 2x - 6 = 3x + 1</p>
+                <p>Сол жақтағы өрнекті жеңілдетеміз:</p>
+                <p>3x - 11 = 3x + 1</p>
+                <p>Айнымалы бар қосылғыштарды сол жаққа, сандарды оң жаққа көшіреміз:</p>
+                <p>3x - 3x = 1 + 11</p>
+                <p>Ұқсас қосылғыштарды біріктіреміз:</p>
+                <p>0 = 12</p>
+                <p>Бұл - қайшылық, яғни теңдеудің шешімі жоқ.</p>
+                <p><strong>Жауабы: шешімдері жоқ</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="problem-set" id="text-problems">
+        <h2>Мәтіндік есептер</h2>
+        
+        <div class="problem">
+            <p><span class="problem-number">1.</span> Сан ойластым. Егер оны 3-ке көбейтіп, нәтижесінен 7-ні азайтсақ, 14 шығады. Мен қандай сан ойладым?</p>
+            <button class="show-solution" onclick="toggleSolution('solution-text1')">Шешімді көрсету</button>
+            <div class="solution" id="solution-text1">
+                <p>Белгілейік: x - ойланған сан</p>
+                <p>Есептің шарты бойынша теңдеу құрамыз:</p>
+                <p>3x - 7 = 14</p>
+                <p>7-ні қарама-қарсы белгімен оң жаққа көшіреміз:</p>
+                <p>3x = 14 + 7</p>
+                <p>3x = 21</p>
+                <p>Теңдеудің екі жағын да 3-ке бөлеміз:</p>
+                <p>x = 21 ÷ 3</p>
+                <p>x = 7</p>
+                <p>Тексеру: 3 × 7 - 7 = 21 - 7 = 14 ✓</p>
+                <p><strong>Жауабы: 7</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">2.</span> Екі сан берілген. Екінші сан бірінші саннан 15-ке көп. Егер бірінші санды 2-ге көбейтіп, екінші санды 3-ке көбейтсек, сосын нәтижелерді қоссақ, 125 шығады. Бірінші санды табыңыз.</p>
+            <button class="show-solution" onclick="toggleSolution('solution-text2')">Шешімді көрсету</button>
+            <div class="solution" id="solution-text2">
+                <p>Белгілейік: x - бірінші сан</p>
+                <p>Сонда екінші сан x + 15 болады.</p>
+                <p>Есептің шарты бойынша теңдеу құрамыз:</p>
+                <p>2x + 3(x + 15) = 125</p>
+                <p>Жақшаларды ашамыз:</p>
+                <p>2x + 3x + 45 = 125</p>
+                <p>5x + 45 = 125</p>
+                <p>45-ті қарама-қарсы белгімен оң жаққа көшіреміз:</p>
+                <p>5x = 125 - 45</p>
+                <p>5x = 80</p>
+                <p>Теңдеудің екі жағын да 5-ке бөлеміз:</p>
+                <p>x = 80 ÷ 5</p>
+                <p>x = 16</p>
+                <p>Тексеру: Екінші сан: 16 + 15 = 31. 2 × 16 + 3 × 31 = 32 + 93 = 125 ✓</p>
+                <p><strong>Жауабы: 16</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">3.</span> Шаршының периметрі 36 см. Оның қабырғасын табыңыз.</p>
+            <button class="show-solution" onclick="toggleSolution('solution-text3')">Шешімді көрсету</button>
+            <div class="solution" id="solution-text3">
+                <p>Белгілейік: x - шаршының қабырғасы (см)</p>
+                <p>Шаршының периметрі 4 қабырғаның қосындысына тең:</p>
+                <p>4x = 36</p>
+                <p>Теңдеудің екі жағын да 4-ке бөлеміз:</p>
+                <p>x = 36 ÷ 4</p>
+                <p>x = 9</p>
+                <p>Тексеру: 4 × 9 = 36 ✓</p>
+                <p><strong>Жауабы: 9 см</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">4.</span> Ерлан мен Асан бірге 84 есеп шығарды. Егер Ерлан Асаннан 4 есепке көп шығарса, әрқайсысы неше есептен шығарды?</p>
+            <button class="show-solution" onclick="toggleSolution('solution-text4')">Шешімді көрсету</button>
+            <div class="solution" id="solution-text4">
+                <p>Белгілейік: x - Асан шығарған есептер саны</p>
+                <p>Сонда Ерлан шығарған есептер саны x + 4 болады.</p>
+                <p>Есептің шарты бойынша теңдеу құрамыз:</p>
+                <p>x + (x + 4) = 84</p>
+                <p>2x + 4 = 84</p>
+                <p>4-ті қарама-қарсы белгімен оң жаққа көшіреміз:</p>
+                <p>2x = 84 - 4</p>
+                <p>2x = 80</p>
+                <p>Теңдеудің екі жағын да 2-ге бөлеміз:</p>
+                <p>x = 80 ÷ 2</p>
+                <p>x = 40</p>
+                <p>Сонда Ерлан шығарған есептер саны: 40 + 4 = 44</p>
+                <p>Тексеру: 40 + 44 = 84 ✓</p>
+                <p><strong>Жауабы: Асан 40 есеп, Ерлан 44 есеп шығарды</strong></p>
+            </div>
+        </div>
+        
+        <div class="problem">
+            <p><span class="problem-number">5.</span> Төртбұрышты бассейннің ұзындығы енінен 5 метрге артық. Егер периметрі 50 метр болса, бассейннің ұзындығы мен енін табыңыз.</p>
+            <button class="show-solution" onclick="toggleSolution('solution-text5')">Шешімді көрсету</button>
+            <div class="solution" id="solution-text5">
+                <p>Белгілейік: x - бассейннің ені (м)</p>
+                <p>Сонда бассейннің ұзындығы x + 5 метр болады.</p>
+                <p>Төртбұрыштың периметрі екі ұзындық пен екі еннің қосындысына тең:</p>
+                <p>2(x + 5) + 2x = 50</p>
+                <p>Жақшаларды ашамыз:</p>
+                <p>2x + 10 + 2x = 50</p>
+                <p>4x + 10 = 50</p>
+                <p>10-ды қарама-қарсы белгімен оң жаққа көшіреміз:</p>
+                <p>4x = 50 - 10</p>
+                <p>4x = 40</p>
+                <p>Теңдеудің екі жағын да 4-ке бөлеміз:</p>
+                <p>x = 40 ÷ 4</p>
+                <p>x = 10</p>
+                <p>Сонда бассейннің ұзындығы: 10 + 5 = 15 метр</p>
+                <p>Тексеру: 2(15 + 10) = 2 × 25 = 50 ✓</p>
+                <p><strong>Жауабы: Бассейннің ұзындығы 15 метр, ені 10 метр</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSolution(id) {
+            var solution = document.getElementById(id);
+            if (solution.style.display === "block") {
+                solution.style.display = "none";
+            } else {
+                solution.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>        
